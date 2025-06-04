@@ -90,7 +90,7 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
           <button
             onClick={(e) => {
               e.stopPropagation();
-              router.push(`/events/${eventId}/edit`);
+              router.push(`/event/${eventId}/edit`);
             }}
             className="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 shadow-sm flex items-center justify-center gap-2"
           >
@@ -140,7 +140,7 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
   };
   return (
     <div
-      onClick={() => router.push(`/events/${eventId}`)}
+      onClick={() => router.push(`/event/${eventId}`)}
       className={`bg-white rounded-xl shadow-sm hove:shadow-lg transition-all duration-300 border border-gray-100 cursor-pointer overflow-hidden relative ${isPastEvent ? "opacity-75" : ""}`}
     >
       {imageUrl && (

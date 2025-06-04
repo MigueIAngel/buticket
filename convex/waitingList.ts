@@ -32,9 +32,24 @@ export const getQueuePosition = query({
       )
       .collect()
       .then((entries) => entries.length);
-      return {
-        ...entry,
-        position: peopleAhead + 1, // +1 for the current user
-      }
+    return {
+      ...entry,
+      position: peopleAhead + 1, // +1 for the current user
+    };
+  },
+});
+export const releaseTicket = mutation({
+  args: {
+    eventId: v.id("events"),
+    waitingListId: v.id("waitinglist"),
+  },
+  handler: async (ctx, { eventId, waitingListId }) => {
+    const entry = await ctx.db.get(waitingListId);
+    if (!entry || entry.status !== WAITING_LIST_STATUS.OFERED) {
+      throw new Error("No valid ticket offer found");
+    }
+    await ctx.db.patch(waitingListId, {
+      status: WAITING_LIST_STATUS.EXPIRED,
+    });
   },
 });
