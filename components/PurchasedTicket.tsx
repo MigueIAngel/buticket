@@ -62,7 +62,7 @@ function PurchasedTicket({ eventId }: { eventId: Id<"events"> }) {
                 <h3 className="text-lg font-semibold text-gray-900">
                   Ticket Reserved
                 </h3>
-                <p className="text-sm text-gray-50">
+                <p className="text-sm text-gray-500">
                   Expires in {timeRemaining}
                 </p>
               </div>

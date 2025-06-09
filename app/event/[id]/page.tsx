@@ -1,5 +1,6 @@
 "use client";
 import EventCard from "@/components/EventCard";
+import JoinQueue from "@/components/JoinQueue";
 import Spiner from "@/components/Spiner";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
@@ -76,10 +77,10 @@ function EventPage() {
 
                   <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
                     <div className="flex items-center text-gray-600 mb-1">
-                      <Ticket className="w-5 h-5 mr-2 text-blue-600" />
+                        <Ticket className="w-5 h-5 mr-2 text-blue-600" />
                       <span className="text-sm font-medium">Price</span>
                     </div>
-                    <p className="text-gray-900">£{event.price.toFixed(2)}</p>
+                    <p className="text-gray-900">${event.price.toFixed(2)}</p>
                   </div>
 
                   <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
@@ -88,7 +89,8 @@ function EventPage() {
                       <span className="text-sm font-medium">Availability</span>
                     </div>
                     <p className="text-gray-900">
-                      {availability.totalTickets - availability.purchasedTickets}{" "}
+                      {availability.totalTickets -
+                        availability.purchasedTickets}{" "}
                       / {availability.totalTickets} left
                     </p>
                   </div>
@@ -113,8 +115,10 @@ function EventPage() {
                   <EventCard eventId={params.id as Id<"events">} />
 
                   {user ? (
-                    
-                    <></>
+                    <JoinQueue
+                      eventId={params.id as Id<"events">}
+                      userId={user.id}
+                    />
                   ) : (
                     <SignInButton>
                       <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-medium py-2 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg">
@@ -129,7 +133,6 @@ function EventPage() {
         </div>
       </div>
     </div>
-       
   );
 }
 
